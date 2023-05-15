@@ -1,0 +1,11 @@
+# Carpeta de dependencias y binarios
+/node_modules/
+/build/
+/dist/
+
+# Archivos de configuración local
+.env
+
+# Archivo de base de datos
+/dgii_db.mdf
+/dgii_db_log.ldf
