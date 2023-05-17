@@ -16,7 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
     // string? password = Environment.GetEnvironmentVariable("DB_PASSWORD");
     string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-    connectionString = connectionString.Replace("{DB_SERVER}", server)
+    connectionString = connectionString?.ToString()
+                                        .Replace("{DB_SERVER}", server)
                                         .Replace("{DB_NAME}", database)
                                         /*.Replace("{DB_USER}", user)
                                         .Replace("{DB_PASSWORD}", password)*/;
