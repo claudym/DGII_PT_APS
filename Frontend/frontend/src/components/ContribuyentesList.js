@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const ContribuyentesList = () => {
+const ContribuyentesList = ({title}) => {
   const [contribuyentes, setContribuyentes] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const ContribuyentesList = () => {
 
   return (
     <div>
-      <h2>Listado de Contribuyentes</h2>
+      <h2>{title}</h2>
       <ul>
         {contribuyentes.map(contribuyente => (
           <li key={contribuyente.rncCedula}>

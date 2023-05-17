@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const ComprobantesList = () => {
+const ComprobantesList = ({title}) => {
   const [comprobantes, setComprobantes] = useState([]);
 
   useEffect(() => {
@@ -12,11 +12,11 @@ const ComprobantesList = () => {
 
   return (
     <div>
-      <h2>Listado de Comprobantes Fiscales</h2>
+      <h2>{title}</h2>
       <ul>
         {comprobantes.map(comprobante => (
-          <li key={comprobante.NCF}>
-            <strong>NCF:</strong> {comprobante.NCF} - <strong>Monto:</strong> {comprobante.monto} - <strong>ITBIS:</strong> {comprobante.itbis18}
+          <li key={comprobante.ncf}>
+            <strong>NCF:</strong> {comprobante.ncf} - <strong>Monto:</strong> {comprobante.monto} - <strong>ITBIS:</strong> {comprobante.itbis18}
           </li>
         ))}
       </ul>
