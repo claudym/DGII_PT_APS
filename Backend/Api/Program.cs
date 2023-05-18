@@ -40,7 +40,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 // App services registration
 builder.Services.AddScoped<IContribuyenteService, ContribuyenteService>();
 builder.Services.AddScoped<IComprobanteFiscalService, ComprobanteFiscalService>();
@@ -55,6 +54,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+builder.Services.AddLogging();
 app.UseCors(MyAllowSpecificOrigins);
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
