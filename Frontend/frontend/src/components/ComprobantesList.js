@@ -1,25 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { tableHeaderStyle, tableCellStyle } from "../utils/tableStyle";
+import { formatCurrency } from "../utils/formatCurrency";
+import { wrapperStyle } from "../utils/generalStyle";
+import { fetchComprobantes } from "../utils/requests";
 
-const ComprobantesList = ({title}) => {
+const ComprobantesList = ({ title }) => {
   const [comprobantes, setComprobantes] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/comprobantesfiscales`)
-      .then(response => response.json())
-      .then(data => setComprobantes(data))
-      .catch(error => console.error(error));
-  }, []);
+    const getData = async () => {
+      if (comprobantes.length === 0) {
+        try {
+          const data = await fetchComprobantes();
+          setComprobantes(data);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    };
+
+    getData();
+  }, [comprobantes]);
 
   return (
-    <div>
+    <div style={wrapperStyle}>
       <h2>{title}</h2>
-      <ul>
-        {comprobantes.map(comprobante => (
-          <li key={comprobante.ncf}>
-            <strong>NCF:</strong> {comprobante.ncf} - <strong>Monto:</strong> {comprobante.monto} - <strong>ITBIS:</strong> {comprobante.itbis18}
-          </li>
-        ))}
-      </ul>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={tableHeaderStyle}>NCF</th>
+            <th style={tableHeaderStyle}>Monto</th>
+            <th style={tableHeaderStyle}>ITBIS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {comprobantes.length > 0 &&
+            comprobantes.map((item) => (
+              <tr key={item.ncf}>
+                <td style={tableCellStyle}>{item.ncf}</td>
+                <td style={tableCellStyle}>{formatCurrency(item.monto)}</td>
+                <td style={tableCellStyle}>{formatCurrency(item.itbis18)}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 };
