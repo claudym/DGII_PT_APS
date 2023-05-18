@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Backend.Models;
+using DGIIAPP.API.Models;
 
-namespace Backend.Data;
+namespace DGIIAPP.API.Data;
 
 public class ApplicationDbContext : DbContext {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {

@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Backend": {
+    "DGIIAPP.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models;
+namespace DGIIAPP.API.Models;
 
 public class ComprobanteFiscal
 {

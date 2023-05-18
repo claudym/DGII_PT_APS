@@ -1,4 +1,4 @@
-namespace Backend.Models;
+namespace DGIIAPP.API.Models;
 
 public class TotalITBISPorRnc
 {
