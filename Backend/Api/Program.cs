@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using dotenv.net;
 using DGIIAPP.Application.Interfaces.Services;
 using DGIIAPP.Infrastructure.Services;
+using DGIIAPP.API.Middlewares;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -55,6 +56,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

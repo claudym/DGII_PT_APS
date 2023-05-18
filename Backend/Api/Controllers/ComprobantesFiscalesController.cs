@@ -7,12 +7,10 @@ using DGIIAPP.Application.Interfaces.Services;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ComprobantesFiscalesController : ControllerBase
-{
+public class ComprobantesFiscalesController : ControllerBase {
     private readonly IComprobanteFiscalService _comprobanteFiscalService;
 
-    public ComprobantesFiscalesController(IComprobanteFiscalService comprobanteFiscalService)
-    {
+    public ComprobantesFiscalesController(IComprobanteFiscalService comprobanteFiscalService) {
         _comprobanteFiscalService = comprobanteFiscalService;
     }
 
@@ -23,9 +21,8 @@ public class ComprobantesFiscalesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<ComprobanteFiscalDTO>>> ComprobantesFiscales()
-    {
-        IEnumerable<ComprobanteFiscalDTO> comprobantesFiscales = await _comprobanteFiscalService.GetComprobantesFiscales();
+    public async Task<ActionResult<ResultDTO<IEnumerable<ComprobanteFiscalDTO>>>> ComprobantesFiscales() {
+        ResultDTO<IEnumerable<ComprobanteFiscalDTO>> comprobantesFiscales = await _comprobanteFiscalService.GetComprobantesFiscales();
         return Ok(comprobantesFiscales);
     }
 
@@ -38,10 +35,9 @@ public class ComprobantesFiscalesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<TotalITBISDTO>> TotalITBIS(string rncCedula)
-    {
-        TotalITBISDTO totalITBIS = await _comprobanteFiscalService.GetTotalITBIS(rncCedula);
-        return (totalITBIS is null) ? NotFound() : Ok(totalITBIS);
+    public async Task<ActionResult<ResultDTO<TotalITBISDTO>>> TotalITBIS(string rncCedula) {
+        ResultDTO<TotalITBISDTO> totalITBIS = await _comprobanteFiscalService.GetTotalITBIS(rncCedula);
+        return Ok(totalITBIS);
     }
 
     /// <summary>
@@ -49,10 +45,8 @@ public class ComprobantesFiscalesController : ControllerBase
     /// </summary>
     /// <returns>Lista del Total de ITBIS por cada contribuyente (RNC/Cedula).</returns>
     [HttpGet("ITBIS/Total")]
-    public async Task<ActionResult<IEnumerable<TotalITBISDTO>>> TotalITBIS()
-    {
-        IEnumerable<TotalITBISDTO> totalITBISList = await _comprobanteFiscalService.GetTotalITBISList();
+    public async Task<ActionResult<ResultDTO<IEnumerable<TotalITBISDTO>>>> TotalITBIS() {
+        ResultDTO<IEnumerable<TotalITBISDTO>> totalITBISList = await _comprobanteFiscalService.GetTotalITBISList();
         return Ok(totalITBISList);
     }
-
 }

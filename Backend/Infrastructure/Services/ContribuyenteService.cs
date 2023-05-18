@@ -9,12 +9,11 @@ namespace DGIIAPP.Infrastructure.Services;
 public class ContribuyenteService : IContribuyenteService {
     private readonly ApplicationDbContext _dbContext;
 
-    public ContribuyenteService(ApplicationDbContext dbContext)
-    {
+    public ContribuyenteService(ApplicationDbContext dbContext) {
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<ContribuyenteDTO>> GetContribuyentes() {
+    public async Task<ResultDTO<IEnumerable<ContribuyenteDTO>>> GetContribuyentes() {
         IEnumerable<Contribuyente> contribuyentes = await  _dbContext.Contribuyentes.ToListAsync();
         List<ContribuyenteDTO> contribuyentesDTO = new List<ContribuyenteDTO>();
         foreach(var contribuyente in contribuyentes) {
@@ -27,6 +26,6 @@ public class ContribuyenteService : IContribuyenteService {
                 }
             );
         }
-        return contribuyentesDTO;
+        return ResultDTO<IEnumerable<ContribuyenteDTO>>.Valid(contribuyentesDTO);
     }
 }

@@ -8,8 +8,7 @@ public class ContribuyentesController : ControllerBase
 {
     private readonly IContribuyenteService _contribuyenteService;
 
-    public ContribuyentesController(IContribuyenteService contribuyenteService)
-    {
+    public ContribuyentesController(IContribuyenteService contribuyenteService) {
         _contribuyenteService = contribuyenteService;
     }
 
@@ -20,9 +19,8 @@ public class ContribuyentesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<ContribuyenteDTO>>> Contribuyentes()
-    {
-        IEnumerable<ContribuyenteDTO> contribuyentes = await  _contribuyenteService.GetContribuyentes();
+    public async Task<ActionResult<ResultDTO<IEnumerable<ContribuyenteDTO>>>> Contribuyentes() {
+        ResultDTO<IEnumerable<ContribuyenteDTO>> contribuyentes = await  _contribuyenteService.GetContribuyentes();
         return Ok(contribuyentes);
     }
 }
