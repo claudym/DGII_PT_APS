@@ -34,6 +34,7 @@ const ComprobantesList = ({ title }) => {
           </tr>
         </thead>
         <tbody>
+          {/* {console.log(comprobantes)} */}
           {comprobantes.length > 0 &&
             comprobantes.map((item) => (
               <tr key={item.ncf}>

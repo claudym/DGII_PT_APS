@@ -3,18 +3,23 @@ using DGIIAPP.Application.Interfaces.Services;
 using DGIIAPP.Domain.Models;
 using DGIIAPP.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DGIIAPP.Infrastructure.Services;
 
 public class ContribuyenteService : IContribuyenteService {
     private readonly ApplicationDbContext _dbContext;
+    private readonly ILogger<ContribuyenteService> _logger;
 
-    public ContribuyenteService(ApplicationDbContext dbContext) {
+    public ContribuyenteService(ApplicationDbContext dbContext, ILogger<ContribuyenteService> logger) {
         _dbContext = dbContext;
+        _logger = logger;
     }
 
     public async Task<ResultDTO<IEnumerable<ContribuyenteDTO>>> GetContribuyentes() {
+        _logger.LogDebug("Buscando Listado de Contribuyentes...");
         IEnumerable<Contribuyente> contribuyentes = await  _dbContext.Contribuyentes.ToListAsync();
+        _logger.LogDebug("Listado de Contribuyentes encontrados.");
         List<ContribuyenteDTO> contribuyentesDTO = new List<ContribuyenteDTO>();
         foreach(var contribuyente in contribuyentes) {
             contribuyentesDTO.Add(

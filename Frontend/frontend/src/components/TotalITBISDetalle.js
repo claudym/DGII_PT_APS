@@ -36,7 +36,7 @@ const TotalITBISDetalle = ({ title }) => {
       try {
         const data = await fetchTotalITBISDetalle(rncCedula);
         setComputedValue(rncCedula);
-        setTotal(data.totalITBIS);
+        setTotal(data.totalITBIS18);
       } catch (error) {
         error.response.status === 404
           ? setErrorMessage("Registro no encontrado")

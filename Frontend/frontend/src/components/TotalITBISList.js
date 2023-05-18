@@ -40,7 +40,7 @@ function TotalITBISList({ title }) {
                 <td style={tableCellStyle}>{item.rncCedula}</td>
                 <td style={tableCellStyle}>{item.nombreContribuyente}</td>
                 <td style={tableCellStyle}>
-                  {formatCurrency(item.totalITBIS)}
+                  {formatCurrency(item.totalITBIS18)}
                 </td>
               </tr>
             ))}
