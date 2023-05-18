@@ -14,8 +14,14 @@ public class ContribuyentesController : ControllerBase
         _dbContext = dbContext;
     }
 
+    /// <summary>
+    /// Obtener Lista de Contribuyentes.
+    /// </summary>
+    /// <returns>Lista de Contribuyentes.</returns>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Contribuyente>>> GetContribuyentes()
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<Contribuyente>>> Contribuyentes()
     {
         IEnumerable<Contribuyente> contribuyentes = await  _dbContext.Contribuyentes.ToListAsync();
         return Ok(contribuyentes);

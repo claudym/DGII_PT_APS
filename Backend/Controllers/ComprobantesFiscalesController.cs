@@ -14,15 +14,29 @@ public class ComprobantesFiscalesController : ControllerBase
         _dbContext = dbContext;
     }
 
+    /// <summary>
+    /// Obtener Lista de Comprobantes Fiscales.
+    /// </summary>
+    /// <returns>Lista de Comprobantes Fiscales.</returns>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ComprobanteFiscal>>> GetComprobantesFiscales()
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<ComprobanteFiscal>>> ComprobantesFiscales()
     {
         IEnumerable<ComprobanteFiscal> comprobantesFiscales = await _dbContext.ComprobantesFiscales.ToListAsync();
         return Ok(comprobantesFiscales);
     }
 
-    [HttpGet("{rncCedula}/total-itbis")]
-    public ActionResult<TotalITBISPorRnc> GetTotalITBIS(string rncCedula)
+    /// <summary>
+    /// Obtener total de ITBIS para un contribuyente (RNC/Cedula).
+    /// </summary>
+    /// <param name="rncCedula"></param>
+    /// <returns>Total de ITBIS para un contribuyente (RNC/Cedula).</returns>
+    [HttpGet("{rncCedula}/ITBIS/Total")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<TotalITBISPorRnc> TotalITBIS(string rncCedula)
     {
         decimal totalITBIS = _dbContext.ComprobantesFiscales
             .Where(cf => cf.RncCedula == rncCedula)
@@ -45,8 +59,12 @@ public class ComprobantesFiscalesController : ControllerBase
         return Ok(totalITBISPorRnc);
     }
 
-    [HttpGet("total-itbis-por-rnc")]
-    public ActionResult<IEnumerable<TotalITBISPorRnc>> GetTotalITBISPorRnc()
+    /// <summary>
+    /// Obtener Lista del Total de ITBIS por cada contribuyente (RNC/Cedula).
+    /// </summary>
+    /// <returns>Lista del Total de ITBIS por cada contribuyente (RNC/Cedula).</returns>
+    [HttpGet("ITBIS/Total")]
+    public ActionResult<IEnumerable<TotalITBISPorRnc>> TotalITBIS()
     {
         IEnumerable<TotalITBISPorRnc> totalITBISPorRnc = _dbContext.ComprobantesFiscales
             .GroupBy(cf => cf.RncCedula)
