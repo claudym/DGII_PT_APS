@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DGIIAPP.API.Migrations
+namespace DGIIAPP.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddModelstoDb : Migration

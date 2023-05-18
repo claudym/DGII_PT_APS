@@ -1,17 +1,16 @@
-using DGIIAPP.API.Data;
-using DGIIAPP.API.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using DGIIAPP.Application.Interfaces.Services;
+using DGIIAPP.Application.DTOs;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ContribuyentesController : ControllerBase
 {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly IContribuyenteService _contribuyenteService;
 
-    public ContribuyentesController(ApplicationDbContext dbContext)
+    public ContribuyentesController(IContribuyenteService contribuyenteService)
     {
-        _dbContext = dbContext;
+        _contribuyenteService = contribuyenteService;
     }
 
     /// <summary>
@@ -21,9 +20,9 @@ public class ContribuyentesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Contribuyente>>> Contribuyentes()
+    public async Task<ActionResult<IEnumerable<ContribuyenteDTO>>> Contribuyentes()
     {
-        IEnumerable<Contribuyente> contribuyentes = await  _dbContext.Contribuyentes.ToListAsync();
+        IEnumerable<ContribuyenteDTO> contribuyentes = await  _contribuyenteService.GetContribuyentes();
         return Ok(contribuyentes);
     }
 }

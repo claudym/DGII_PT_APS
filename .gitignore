@@ -2,6 +2,7 @@
 /build/
 /dist/
 obj/
+.vscode/
 
 # Archivos de configuración local
 .env

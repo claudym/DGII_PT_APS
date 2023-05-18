@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,11 +18,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <ProjectReference Include="..\Domain\DGIIAPP.Domain.csproj" />
     <ProjectReference Include="..\Application\DGIIAPP.Application.csproj" />
-    <ProjectReference Include="..\Infrastructure\DGIIAPP.Infrastructure.csproj" />
-    <ProjectReference Include="..\Tests\DGIIAPP.Tests.csproj" />
   </ItemGroup>
 
 </Project>

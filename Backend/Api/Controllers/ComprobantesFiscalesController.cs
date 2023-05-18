@@ -1,17 +1,19 @@
-using DGIIAPP.API.Data;
-using DGIIAPP.API.Models;
+using DGIIAPP.Infrastructure.Data;
+using DGIIAPP.Domain.Models;
+using DGIIAPP.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DGIIAPP.Application.Interfaces.Services;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ComprobantesFiscalesController : ControllerBase
 {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly IComprobanteFiscalService _comprobanteFiscalService;
 
-    public ComprobantesFiscalesController(ApplicationDbContext dbContext)
+    public ComprobantesFiscalesController(IComprobanteFiscalService comprobanteFiscalService)
     {
-        _dbContext = dbContext;
+        _comprobanteFiscalService = comprobanteFiscalService;
     }
 
     /// <summary>
@@ -21,9 +23,9 @@ public class ComprobantesFiscalesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<ComprobanteFiscal>>> ComprobantesFiscales()
+    public async Task<ActionResult<IEnumerable<ComprobanteFiscalDTO>>> ComprobantesFiscales()
     {
-        IEnumerable<ComprobanteFiscal> comprobantesFiscales = await _dbContext.ComprobantesFiscales.ToListAsync();
+        IEnumerable<ComprobanteFiscalDTO> comprobantesFiscales = await _comprobanteFiscalService.GetComprobantesFiscales();
         return Ok(comprobantesFiscales);
     }
 
@@ -36,27 +38,10 @@ public class ComprobantesFiscalesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<TotalITBISPorRnc> TotalITBIS(string rncCedula)
+    public async Task<ActionResult<TotalITBISDTO>> TotalITBIS(string rncCedula)
     {
-        decimal totalITBIS = _dbContext.ComprobantesFiscales
-            .Where(cf => cf.RncCedula == rncCedula)
-            .Sum(cf => cf.Itbis18);
-
-        Contribuyente? contribuyente = _dbContext.Contribuyentes.FirstOrDefault(c => c.RncCedula == rncCedula);
-
-        if (contribuyente == null)
-        {
-            return NotFound();
-        }
-
-        TotalITBISPorRnc totalITBISPorRnc = new TotalITBISPorRnc
-        {
-            RncCedula = rncCedula,
-            NombreContribuyente = contribuyente.Nombre,
-            TotalITBIS = totalITBIS
-        };
-
-        return Ok(totalITBISPorRnc);
+        TotalITBISDTO totalITBIS = await _comprobanteFiscalService.GetTotalITBIS(rncCedula);
+        return (totalITBIS is null) ? NotFound() : Ok(totalITBIS);
     }
 
     /// <summary>
@@ -64,18 +49,10 @@ public class ComprobantesFiscalesController : ControllerBase
     /// </summary>
     /// <returns>Lista del Total de ITBIS por cada contribuyente (RNC/Cedula).</returns>
     [HttpGet("ITBIS/Total")]
-    public ActionResult<IEnumerable<TotalITBISPorRnc>> TotalITBIS()
+    public async Task<ActionResult<IEnumerable<TotalITBISDTO>>> TotalITBIS()
     {
-        IEnumerable<TotalITBISPorRnc> totalITBISPorRnc = _dbContext.ComprobantesFiscales
-            .GroupBy(cf => cf.RncCedula)
-            .Select(group => new TotalITBISPorRnc
-            {
-                RncCedula = group.Key,
-                NombreContribuyente = _dbContext.Contribuyentes.FirstOrDefault(c => c.RncCedula == group.Key)!.Nombre,
-                TotalITBIS = group.Sum(cf => cf.Itbis18)
-            })
-            .ToList();
-        return Ok(totalITBISPorRnc);
+        IEnumerable<TotalITBISDTO> totalITBISList = await _comprobanteFiscalService.GetTotalITBISList();
+        return Ok(totalITBISList);
     }
 
 }

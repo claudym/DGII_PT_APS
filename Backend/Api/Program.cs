@@ -1,6 +1,8 @@
-using DGIIAPP.API.Data;
+using DGIIAPP.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using dotenv.net;
+using DGIIAPP.Application.Interfaces.Services;
+using DGIIAPP.Infrastructure.Services;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -37,6 +39,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// App services registration
+builder.Services.AddScoped<IContribuyenteService, ContribuyenteService>();
+builder.Services.AddScoped<IComprobanteFiscalService, ComprobanteFiscalService>();
 
 var app = builder.Build();
 

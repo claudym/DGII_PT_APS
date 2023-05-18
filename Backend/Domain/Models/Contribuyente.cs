@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DGIIAPP.API.Models;
+namespace DGIIAPP.Domain.Models;
 
 public class Contribuyente
 {
