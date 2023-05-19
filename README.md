@@ -11,7 +11,7 @@ Aqui detallo los pasos para correr el proyecto:
 # Backend
 
 1. Crear un archivo ".env" dentro de Backend/Api/ con las credenciales de la DB (serverValue, dbName, dbUser, y dbPassword son los valores reales de la base de datos a conectar):\
-   Backend/Api/.env':\
+   'Backend/Api/.env':\
    DB_SERVER=serverValue\
    DB_NAME=dbName\
    DB_USER=dbUser\
@@ -39,8 +39,8 @@ Este endpoint devuelve una lista de la suma del ITBIS de todos los comprobantes 
 
 # Frontend
 
-1. Crear un archivo ".env" en Frontend/frontend/ con el react app api url (el url puede ser distinto):
-   'Frontend/frontend/.env':
+1. Crear un archivo ".env" en Frontend/frontend/ con el react app api url (el url puede ser distinto):\
+   'Frontend/frontend/.env':\
    REACT_APP_API_URL=https://localhost:7220/api
 
 2. Correr using 'npm start' en Frontend/frontend
