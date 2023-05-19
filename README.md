@@ -21,18 +21,19 @@ Aqui detallo los pasos para correr el proyecto:
 
 ## Endpoints:
 
-1. GET /api/Contribuyentes:
-   Este endpoint devuelve un listado de todos los contribuyentes, incluyendo información como su RNC/Cédula, nombre, tipo y estatus. Esto permite a los directivos obtener el listado de los contribuyentes.
+1. **GET /api/Contribuyentes**:
 
-2. GET /api/ComprobantesFiscales:
+Este endpoint devuelve un listado de todos los contribuyentes, incluyendo información como su RNC/Cédula, nombre, tipo y estatus. Esto permite a los directivos obtener el listado de los contribuyentes.
+
+2. **GET /api/ComprobantesFiscales**:
 
 Este endpoint devuelve un listado de todos los comprobantes fiscales reportados. Cada comprobante fiscal incluye información como el RNC/Cédula asociado, número de comprobante (NCF), monto y el ITBIS correspondiente. Esto permite a los directivos acceder a los comprobantes fiscales.
 
-3. GET /api/ComprobantesFiscales/{rncCedula}/ITBIS/Total:
+3. **GET /api/ComprobantesFiscales/{rncCedula}/ITBIS/Total**:
 
 Este endpoint devuelve el total de la suma del ITBIS de los comprobantes fiscales de un contribuyente específico identificado por su RNC/Cédula. Esto permite a los directivos obtener el total de la suma del ITBIS de un contribuyente en particular.
 
-4. GET /api/ComprobantesFiscales/ITBIS/Total:
+4. **GET /api/ComprobantesFiscales/ITBIS/Total**:
 
 Este endpoint devuelve una lista de la suma del ITBIS de todos los comprobantes fiscales agrupados por el campo "RNC/Cédula". Esto permite a los directivos obtener la suma del ITBIS de todos los comprobantes fiscales por cada contribuyente.
 
