@@ -16,13 +16,13 @@ public class ComprobanteFiscalService : IComprobanteFiscalService {
         _logger = logger;
     }
 
-    public async Task<ResultDTO<IEnumerable<ComprobanteFiscalDTO>>> GetComprobantesFiscales() {
+    public async Task<ResultDTO<IEnumerable<ComprobanteFiscalDTO>>> GetComprobanteFiscal() {
         _logger.LogDebug("Buscando Listado de Comprobantes Fiscales...");
-        IEnumerable<ComprobanteFiscal> comprobantesfiscales = await  _dbContext.ComprobantesFiscales.ToListAsync();
+        IEnumerable<ComprobanteFiscal> ComprobanteFiscal = await  _dbContext.ComprobanteFiscal.ToListAsync();
         _logger.LogDebug("Listado de Comprobantes Fiscales encontrados.");
 
         List<ComprobanteFiscalDTO> comprobantesDTO = new List<ComprobanteFiscalDTO>();
-        foreach(var comprobantefiscal in comprobantesfiscales) {
+        foreach(var comprobantefiscal in ComprobanteFiscal) {
             comprobantesDTO.Add(
                 new ComprobanteFiscalDTO {
                     NCF = comprobantefiscal.NCF,
@@ -36,11 +36,11 @@ public class ComprobanteFiscalService : IComprobanteFiscalService {
     }
 
     public async Task<ResultDTO<TotalITBISDTO>> GetTotalITBIS(string rncCedula) {
-        decimal totalITBIS = _dbContext.ComprobantesFiscales
+        decimal totalITBIS = _dbContext.ComprobanteFiscal
             .Where(cf => cf.RncCedula == rncCedula)
             .Sum(cf => cf.Itbis18);
         _logger.LogDebug("Buscando el Total de ITBIS para un contribuyente...");
-        Contribuyente? contribuyente = await _dbContext.Contribuyentes.FirstOrDefaultAsync(c => c.RncCedula == rncCedula);
+        Contribuyente? contribuyente = await _dbContext.Contribuyente.FirstOrDefaultAsync(c => c.RncCedula == rncCedula);
         if (contribuyente == null) {
             _logger.LogError($"Total de ITBIS: Registro con RNC/Cédula {rncCedula} no existe.");
             throw new NotFoundException($"Registro con RNC/Cédula {rncCedula} no existe.");
@@ -56,11 +56,11 @@ public class ComprobanteFiscalService : IComprobanteFiscalService {
 
     public async Task<ResultDTO<IEnumerable<TotalITBISDTO>>> GetTotalITBISList() {
         _logger.LogDebug("Buscando Listado del Total de ITBIS por cada contribuyente...");
-        IEnumerable<TotalITBISDTO> totalITBISPorRnc = await _dbContext.ComprobantesFiscales
+        IEnumerable<TotalITBISDTO> totalITBISPorRnc = await _dbContext.ComprobanteFiscal
             .GroupBy(cf => cf.RncCedula)
             .Select(group => new TotalITBISDTO {
                 RncCedula = group.Key,
-                NombreContribuyente = _dbContext.Contribuyentes.FirstOrDefault(c => c.RncCedula == group.Key)!.Nombre,
+                NombreContribuyente = _dbContext.Contribuyente.FirstOrDefault(c => c.RncCedula == group.Key)!.Nombre,
                 TotalITBIS18 = group.Sum(cf => cf.Itbis18)
             })
             .ToListAsync();

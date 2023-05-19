@@ -12,12 +12,12 @@ public class ComprobanteFiscalServiceTests : IClassFixture<InMemoryDatabaseFixtu
     }
 
     [Fact]
-    public async Task GetComprobantesFiscales_Should_Return_ListOfComprobanteFiscalDTO() {
+    public async Task GetComprobanteFiscal_Should_Return_ListOfComprobanteFiscalDTO() {
         // Arrange
         var loggerMock = new Mock<ILogger<ComprobanteFiscalService>>();
         var service = new ComprobanteFiscalService(_fixture.DbContext, loggerMock.Object);
         _fixture.DbContext.ChangeTracker.Clear();
-        _fixture.DbContext.ComprobantesFiscales.AddRange(new[]
+        _fixture.DbContext.ComprobanteFiscal.AddRange(new[]
         {
             new ComprobanteFiscal { NCF = "B0100000005", RncCedula = "00112345678", Monto = 100, Itbis18 = 18 },
             new ComprobanteFiscal { NCF = "B0100003256", RncCedula = "00298765432", Monto = 200, Itbis18 = 36 },
@@ -26,7 +26,7 @@ public class ComprobanteFiscalServiceTests : IClassFixture<InMemoryDatabaseFixtu
         await _fixture.DbContext.SaveChangesAsync();
 
         // Act
-        var result = await service.GetComprobantesFiscales();
+        var result = await service.GetComprobanteFiscal();
 
         // Assert
         Assert.True(result.Success);
@@ -39,12 +39,12 @@ public class ComprobanteFiscalServiceTests : IClassFixture<InMemoryDatabaseFixtu
         var loggerMock = new Mock<ILogger<ComprobanteFiscalService>>();
         var service = new ComprobanteFiscalService(_fixture.DbContext, loggerMock.Object);
         _fixture.DbContext.ChangeTracker.Clear();
-        _fixture.DbContext.Contribuyentes.AddRange(new[]
+        _fixture.DbContext.Contribuyente.AddRange(new[]
         {
             new Contribuyente { RncCedula = "00112345678", Nombre = "María Fernández", Tipo = "Persona Juridica", Estatus = "Activo" },
             new Contribuyente { RncCedula = "00298765432", Nombre = "Alejandro Medina", Tipo = "Persona Fisica", Estatus = "Inactivo" },
         });
-        _fixture.DbContext.ComprobantesFiscales.AddRange(new[]
+        _fixture.DbContext.ComprobanteFiscal.AddRange(new[]
         {
             new ComprobanteFiscal { NCF = "B0100000005", RncCedula = "00112345678", Monto = 100, Itbis18 = 18 },
             new ComprobanteFiscal { NCF = "B0100003256", RncCedula = "00298765432", Monto = 200, Itbis18 = 36 },
@@ -79,12 +79,12 @@ public class ComprobanteFiscalServiceTests : IClassFixture<InMemoryDatabaseFixtu
         var loggerMock = new Mock<ILogger<ComprobanteFiscalService>>();
         var service = new ComprobanteFiscalService(_fixture.DbContext, loggerMock.Object);
         _fixture.DbContext.ChangeTracker.Clear();
-        _fixture.DbContext.Contribuyentes.AddRange(new[]
+        _fixture.DbContext.Contribuyente.AddRange(new[]
         {
             new Contribuyente { RncCedula = "00112345678", Nombre = "María Fernández", Tipo = "Persona Juridica", Estatus = "Activo" },
             new Contribuyente { RncCedula = "00298765432", Nombre = "Alejandro Medina", Tipo = "Persona Fisica", Estatus = "Inactivo" },
         });
-        _fixture.DbContext.ComprobantesFiscales.AddRange(new[]
+        _fixture.DbContext.ComprobanteFiscal.AddRange(new[]
         {
             new ComprobanteFiscal { NCF = "B0100000005", RncCedula = "00112345678", Monto = 100, Itbis18 = 18 },
             new ComprobanteFiscal { NCF = "B0100003256", RncCedula = "00298765432", Monto = 200, Itbis18 = 36 },

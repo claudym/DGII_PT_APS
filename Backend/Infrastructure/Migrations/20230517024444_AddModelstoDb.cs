@@ -11,7 +11,7 @@ namespace DGIIAPP.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ComprobantesFiscales",
+                name: "ComprobanteFiscal",
                 columns: table => new
                 {
                     NCF = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -21,11 +21,11 @@ namespace DGIIAPP.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ComprobantesFiscales", x => x.NCF);
+                    table.PrimaryKey("PK_ComprobanteFiscal", x => x.NCF);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contribuyentes",
+                name: "Contribuyente",
                 columns: table => new
                 {
                     RncCedula = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -35,7 +35,7 @@ namespace DGIIAPP.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contribuyentes", x => x.RncCedula);
+                    table.PrimaryKey("PK_Contribuyente", x => x.RncCedula);
                 });
         }
 
@@ -43,10 +43,10 @@ namespace DGIIAPP.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ComprobantesFiscales");
+                name: "ComprobanteFiscal");
 
             migrationBuilder.DropTable(
-                name: "Contribuyentes");
+                name: "Contribuyente");
         }
     }
 }

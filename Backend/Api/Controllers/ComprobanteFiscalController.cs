@@ -1,8 +1,5 @@
-using DGIIAPP.Infrastructure.Data;
-using DGIIAPP.Domain.Models;
 using DGIIAPP.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using DGIIAPP.Application.Interfaces.Services;
 
 [ApiController]
@@ -21,9 +18,9 @@ public class ComprobanteFiscalController : ControllerBase {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ResultDTO<IEnumerable<ComprobanteFiscalDTO>>>> ComprobantesFiscales() {
-        ResultDTO<IEnumerable<ComprobanteFiscalDTO>> comprobantesFiscales = await _comprobanteFiscalService.GetComprobantesFiscales();
-        return Ok(comprobantesFiscales);
+    public async Task<ActionResult<ResultDTO<IEnumerable<ComprobanteFiscalDTO>>>> ComprobanteFiscal() {
+        ResultDTO<IEnumerable<ComprobanteFiscalDTO>> ComprobanteFiscal = await _comprobanteFiscalService.GetComprobanteFiscal();
+        return Ok(ComprobanteFiscal);
     }
 
     /// <summary>

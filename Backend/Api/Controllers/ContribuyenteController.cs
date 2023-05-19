@@ -13,14 +13,14 @@ public class ContribuyenteController : ControllerBase
     }
 
     /// <summary>
-    /// Obtener Lista de Contribuyentes.
+    /// Obtener Lista de Contribuyente.
     /// </summary>
-    /// <returns>Lista de Contribuyentes.</returns>
+    /// <returns>Lista de Contribuyente.</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ResultDTO<IEnumerable<ContribuyenteDTO>>>> Contribuyentes() {
-        ResultDTO<IEnumerable<ContribuyenteDTO>> contribuyentes = await  _contribuyenteService.GetContribuyentes();
+    public async Task<ActionResult<ResultDTO<IEnumerable<ContribuyenteDTO>>>> Contribuyente() {
+        ResultDTO<IEnumerable<ContribuyenteDTO>> contribuyentes = await  _contribuyenteService.GetContribuyente();
         return Ok(contribuyentes);
     }
 }
