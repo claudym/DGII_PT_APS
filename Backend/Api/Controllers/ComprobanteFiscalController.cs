@@ -7,10 +7,10 @@ using DGIIAPP.Application.Interfaces.Services;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ComprobantesFiscalesController : ControllerBase {
+public class ComprobanteFiscalController : ControllerBase {
     private readonly IComprobanteFiscalService _comprobanteFiscalService;
 
-    public ComprobantesFiscalesController(IComprobanteFiscalService comprobanteFiscalService) {
+    public ComprobanteFiscalController(IComprobanteFiscalService comprobanteFiscalService) {
         _comprobanteFiscalService = comprobanteFiscalService;
     }
 

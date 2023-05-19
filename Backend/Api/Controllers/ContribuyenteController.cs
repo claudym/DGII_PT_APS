@@ -4,11 +4,11 @@ using DGIIAPP.Application.DTOs;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ContribuyentesController : ControllerBase
+public class ContribuyenteController : ControllerBase
 {
     private readonly IContribuyenteService _contribuyenteService;
 
-    public ContribuyentesController(IContribuyenteService contribuyenteService) {
+    public ContribuyenteController(IContribuyenteService contribuyenteService) {
         _contribuyenteService = contribuyenteService;
     }
 
