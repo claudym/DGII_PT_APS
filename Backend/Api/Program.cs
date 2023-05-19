@@ -25,15 +25,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 
     string? server = Environment.GetEnvironmentVariable("DB_SERVER");
     string? database = Environment.GetEnvironmentVariable("DB_NAME");
-    // string? user = Environment.GetEnvironmentVariable("DB_USER");
-    // string? password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+    string? user = Environment.GetEnvironmentVariable("DB_USER");
+    string? password = Environment.GetEnvironmentVariable("DB_PASSWORD");
     string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
     connectionString = connectionString?.ToString()
                                         .Replace("{DB_SERVER}", server)
                                         .Replace("{DB_NAME}", database)
-                                        /*.Replace("{DB_USER}", user)
-                                        .Replace("{DB_PASSWORD}", password)*/;
+                                        .Replace("{DB_USER}", user)
+                                        .Replace("{DB_PASSWORD}", password);
     options.UseSqlServer(connectionString);
 });
 
