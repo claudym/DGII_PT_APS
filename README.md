@@ -10,13 +10,12 @@ Aqui detallo los pasos para correr el proyecto:
 
 # Backend
 
-1. Crear un archivo ".env" dentro de Backend/Api/ con las credenciales de la DB (serverValue, dbName, dbUser, y dbPassword son los valores reales de la base de datos a conectar):
-   'Backend/Api/.env':
-
-DB_SERVER=serverValue
-DB_NAME=dbName
-DB_USER=dbUser
-DB_PASSWORD=dbPassword
+1. Crear un archivo ".env" dentro de Backend/Api/ con las credenciales de la DB (serverValue, dbName, dbUser, y dbPassword son los valores reales de la base de datos a conectar):\
+   Backend/Api/.env':\
+   DB_SERVER=serverValue\
+   DB_NAME=dbName\
+   DB_USER=dbUser\
+   DB_PASSWORD=dbPassword
 
 2. Se puede correr en Visual Studio o usando .NET CLI (correr "dotnet run" dentro del directorio Backend/Api).
 
