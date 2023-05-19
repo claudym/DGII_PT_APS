@@ -41,7 +41,7 @@ namespace DGIIAPP.Infrastructure.Migrations
 
                     b.HasKey("NCF");
 
-                    b.ToTable("ComprobanteFiscal");
+                    b.ToTable("ComprobantesFiscales");
                 });
 
             modelBuilder.Entity("DGIIAPP.Domain.Models.Contribuyente", b =>
@@ -63,7 +63,7 @@ namespace DGIIAPP.Infrastructure.Migrations
 
                     b.HasKey("RncCedula");
 
-                    b.ToTable("Contribuyente");
+                    b.ToTable("Contribuyentes");
                 });
 #pragma warning restore 612, 618
         }

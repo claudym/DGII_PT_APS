@@ -18,7 +18,7 @@ public class ContribuyenteService : IContribuyenteService {
 
     public async Task<ResultDTO<IEnumerable<ContribuyenteDTO>>> GetContribuyente() {
         _logger.LogDebug("Buscando Listado de Contribuyente...");
-        IEnumerable<Contribuyente> contribuyentes = await  _dbContext.Contribuyente.ToListAsync();
+        IEnumerable<Contribuyente> contribuyentes = await  _dbContext.Contribuyentes.ToListAsync();
         _logger.LogDebug("Listado de Contribuyente encontrados.");
         List<ContribuyenteDTO> contribuyentesDTO = new List<ContribuyenteDTO>();
         foreach(var contribuyente in contribuyentes) {

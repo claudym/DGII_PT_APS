@@ -8,8 +8,8 @@ public class ApplicationDbContext : DbContext {
 
     }
 
-    public DbSet<Contribuyente> Contribuyente { get; set; }
-    public DbSet<ComprobanteFiscal> ComprobanteFiscal { get; set; }
+    public DbSet<Contribuyente> Contribuyentes { get; set; }
+    public DbSet<ComprobanteFiscal> ComprobantesFiscales { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
