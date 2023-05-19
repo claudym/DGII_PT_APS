@@ -8,7 +8,7 @@ Industrializados y Servicios) de sus comprobantes fiscales reportados.
 
 Aqui detallo los pasos para correr el proyecto:
 
-# Backend
+# Database (SQL Server)
 
 1. Crear un archivo ".env" dentro de Backend/Api/ con las credenciales de la DB (serverValue, dbName, dbUser, y dbPassword son los valores reales de la base de datos a conectar):\
    'Backend/Api/.env':\
@@ -17,7 +17,11 @@ Aqui detallo los pasos para correr el proyecto:
    DB_USER=dbUser\
    DB_PASSWORD=dbPassword
 
-2. Se puede correr en Visual Studio o usando .NET CLI (correr "dotnet run" dentro del directorio Backend/Api).
+2. En el Backend/Api correr la migracion de la base de datos en Visual Studio o usando .NET CLI(correr "dotnet ef database update").
+
+# Backend (.NET 6)
+
+1. Se puede correr en Visual Studio o usando .NET CLI (correr "dotnet run" dentro del directorio Backend/Api).
 
 ## Endpoints:
 
@@ -37,7 +41,7 @@ Este endpoint devuelve el total de la suma del ITBIS de los comprobantes fiscale
 
 Este endpoint devuelve una lista de la suma del ITBIS de todos los comprobantes fiscales agrupados por el campo "RNC/Cédula". Esto permite a los directivos obtener la suma del ITBIS de todos los comprobantes fiscales por cada contribuyente.
 
-# Frontend
+# Frontend (React)
 
 1. Crear un archivo ".env" en Frontend/ con el react app api url (el url puede ser distinto):\
    'Frontend/.env':\
